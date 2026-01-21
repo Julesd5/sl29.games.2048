@@ -88,7 +88,6 @@ Ou avec l'option pour désactiver le nettoyage du terminal (utile pour le débog
    python -m sl29.games.cli_2048 --no-clear
 
 Les commandes disponibles sont :
-
 - g : déplacer à gauche
 - d : déplacer à droite
 - h : déplacer en haut
