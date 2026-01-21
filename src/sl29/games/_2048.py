@@ -46,7 +46,7 @@ def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]
     else:
         return plateau, 0, False
 
-    if (nouveau != plateau):
+    if nouveau != plateau:
         nouveau = _ajouter_tuile(nouveau)
 
     # Vérification si partie terminée ou non

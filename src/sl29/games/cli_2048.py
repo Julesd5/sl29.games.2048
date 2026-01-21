@@ -39,7 +39,6 @@ def afficher_plateau(plateau: List[List[int]]) -> None:
         print()
     print()
 
-
 def demander_commande() -> str:
     """
     Demande une commande à l'utilisateur via l'entrée standard.
@@ -112,4 +111,3 @@ def jouer() -> None:
 
 if __name__ == "__main__":
     jouer()
-
