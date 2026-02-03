@@ -73,7 +73,14 @@ def test__ajouter_tuile():
 
 def test__supprimer_zeros():
     print("----> Tests de _supprimer_zeros...")
-    raise NotImplementedError("Tests de _supprimer_zeros non implémentés.")
+    liste = [0,0,0]
+    expected = []
+    result = _supprimer_zeros(liste)
+    assert result == expected, f"Supprimer 0 de {liste} aurais du etre {expected} mais vaut {result}"
+    liste = [0,16,32]
+    expected = [16,32]
+    result = _supprimer_zeros(liste)
+    assert result == expected, f"Supprimer 0 de {liste} aurais du etre {expected} mais vaut {result}"
     print("OK")
 
 def test__fusionner():
