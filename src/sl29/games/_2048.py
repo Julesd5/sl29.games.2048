@@ -1,6 +1,7 @@
 """Module providing the logic of the 2048 game"""
 
 import random
+import copy
 from typing import List, Tuple
 
 TAILLE:int = 4
@@ -70,7 +71,12 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     :return: Une nouvelle grille avec une tuile ajoutée.
     :rtype: List[List[int]]
     """
-    
+    liste = _get_cases_vides(plateau)
+    (i,j) = random.choice(liste)
+    n_plateau = copy.deepcopy(plateau)
+    n_plateau[i][j]= 2
+    return n_plateau
+
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
     """
@@ -81,7 +87,7 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :return: La ligne sans zéros.
     :rtype: List[int]
     """
-    raise NotImplementedError("Fonction _supprimer_zeros non implémentée.")
+    
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     """
