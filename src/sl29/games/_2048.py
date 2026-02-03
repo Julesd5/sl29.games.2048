@@ -54,7 +54,12 @@ def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
     :return: Une liste de coordonnées
     :rtype: List[Tuple[int, int]]
     """
-    raise NotImplementedError("Fonction _get_cases_vides non implémentée.")
+    liste = []
+    for i in range(len((plateau))):
+        for j in range(len((plateau))):
+            if plateau[i][j] == 0:
+                liste.append((i,j))
+    return liste
 
 def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     """
@@ -65,7 +70,7 @@ def _ajouter_tuile(plateau: List[List[int]]) -> List[List[int]]:
     :return: Une nouvelle grille avec une tuile ajoutée.
     :rtype: List[List[int]]
     """
-    raise NotImplementedError("Fonction _ajouter_tuile non implémentée.")
+    
 
 def _supprimer_zeros(ligne: List[int]) -> List[int]:
     """
