@@ -122,11 +122,18 @@ def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
     return liste_fusionnee, points
 
 
-def _completer_zeros(ligne): # ajouter les annotations de type
+def _completer_zeros(ligne: List[int]) -> List[int]:
     """
-    DOCSTRING À ECIRE
+    :param ligne: Une ligne sans zeros
+    :type ligne: List[int]
+    :return: La ligne avec des zeros apres fusion
+    :rtype: Tuple[List[int], int]
     """
-    raise NotImplementedError("Fonction _completer_zeros non implémentée.")
+    liste = ligne
+    while len(liste) < TAILLE:
+        liste.append(0)
+    return liste
+
 
 def _deplacer_gauche(plateau) : # ajouter les annotations de type
     """
