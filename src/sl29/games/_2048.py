@@ -135,11 +135,24 @@ def _completer_zeros(ligne: List[int]) -> List[int]:
     return liste
 
 
-def _deplacer_gauche(plateau) : # ajouter les annotations de type
+def _deplacer_gauche(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
-    DOCSTRING À ÉCRIRE
+    :param plateau: Le plateau de jeu 2048, une liste de listes d'entiers représentant les lignes du plateau.
+    :type plateau: List[List[int]]
+    :return: Un tuple contenant le nouveau plateau après le déplacement à gauche et le nombre de points gagnés.
+    :rtype: Tuple[List[List[int]], int]
     """
-    raise NotImplementedError("Fonction _deplacer_gauche non implémentée.")
+    nv_plateau = []
+    nv_points = 0
+    for i in range(len(plateau)):
+        ligne_sans_zeros = _supprimer_zeros(plateau[i])
+        ligne_fusionee, points = _fusionner(ligne_sans_zeros)
+        nv_points += points
+        ligne_finale = _completer_zeros(ligne_fusionee)
+        nv_plateau.append(ligne_finale)
+    return nv_plateau, nv_points
+
+
 
 def _inverser_lignes(plateau): # ajouter les annotations de type
     """
