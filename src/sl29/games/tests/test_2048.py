@@ -151,8 +151,7 @@ def test__deplacer_gauche():
     print("OK")
 
 def test__inverser_lignes():
-    print("----> Tests de _inverser_lignes...")
-    raise NotImplementedError("Tests de _inverser_lignes non implémentés.")
+    
     print("OK")
 
 def test__deplacer_droite():

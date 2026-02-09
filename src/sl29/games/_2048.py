@@ -137,9 +137,11 @@ def _completer_zeros(ligne: List[int]) -> List[int]:
 
 def _deplacer_gauche(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
-    :param plateau: Le plateau de jeu 2048, une liste de listes d'entiers représentant les lignes du plateau.
+    Déplace les tuiles vers la gauche en fusionnant les valeurs identiques.
+    
+    :param plateau: La grille actuelle du jeu.
     :type plateau: List[List[int]]
-    :return: Un tuple contenant le nouveau plateau après le déplacement à gauche et le nombre de points gagnés.
+    :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     :rtype: Tuple[List[List[int]], int]
     """
     nv_plateau = []
@@ -153,12 +155,17 @@ def _deplacer_gauche(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     return nv_plateau, nv_points
 
 
+def _inverser_lignes(plateau: List[List[int]]) -> List[List[int]]:
+        """
+        Inverse l'ordre des lignes du plateau (première ligne devient dernière, etc.).
+        
+        :param plateau: La grille actuelle du jeu.
+        :type plateau: List[List[int]]
+        :return: Le plateau avec les lignes inversées.
+        :rtype: List[List[int]]
+        """
+    return plateau[::-1]
 
-def _inverser_lignes(plateau): # ajouter les annotations de type
-    """
-    DOCSTRING À ÉCRIRE
-    """
-    raise NotImplementedError("Fonction _inverser_lignes non implémentée.")
 
 def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
@@ -169,7 +176,18 @@ def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     :rtype: Tuple[List[List[int]], int]
     """
-    raise NotImplementedError("Fonction _deplacer_droite non implémentée.")
+    nv_plateau = []
+    nv_points = 0
+    for i in range(len(plateau)):
+        ligne_sans_zeros = _supprimer_zeros(plateau[i])
+        ligne_fusionee, points = _fusionner(ligne_sans_zeros)
+        nv_points += points
+        ligne_finale = _completer_zeros(ligne_fusionee)
+        ligne_finale = _inverser_lignes(ligne_finale)
+        nv_plateau.append(ligne_finale)
+    return nv_plateau, nv_points
+    
+
 
 def _transposer(plateau): # ajouter les annotations de type
     """
