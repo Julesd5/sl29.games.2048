@@ -35,7 +35,26 @@ def jouer_coup(plateau: List[List[int]], direction: str) -> tuple[List[List[int]
     :rtype: tuple[List[List[int]], int, bool]
     """
 
-    raise NotImplementedError("Fonction jouer_coup non implémentée.")
+    # En fonction de la direction choisie on effectue les déplacement du plateau
+    if direction == "g":
+        nouveau, points_du_coup = _deplacer_gauche(plateau)
+    elif direction == "d":
+        nouveau, points_du_coup = _deplacer_droite(plateau)
+    elif direction == "h":
+        nouveau, points_du_coup = _deplacer_haut(plateau)
+    elif direction == 'b':
+        nouveau, points_du_coup = _deplacer_bas(plateau)
+    else:
+        return plateau, 0, False
+
+    if nouveau != plateau:
+        nouveau = _ajouter_tuile(nouveau)
+
+    # Vérification si partie terminée ou non
+    fini: bool = _partie_terminee(nouveau)
+
+    return nouveau, points_du_coup, fini
+
 
 # ==========================================================
 # 🔒 FONCTIONS PRIVÉES (LOGIQUE INTERNE)
@@ -156,14 +175,14 @@ def _deplacer_gauche(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
 
 
 def _inverser_lignes(plateau: List[List[int]]) -> List[List[int]]:
-        """
-        Inverse l'ordre des lignes du plateau (première ligne devient dernière, etc.).
-        
-        :param plateau: La grille actuelle du jeu.
-        :type plateau: List[List[int]]
-        :return: Le plateau avec les lignes inversées.
-        :rtype: List[List[int]]
-        """
+    """
+    Inverse l'ordre des lignes du plateau (première ligne devient dernière, etc.).
+    
+    :param plateau: La grille actuelle du jeu.
+    :type plateau: List[List[int]]
+    :return: Le plateau avec les lignes inversées.
+    :rtype: List[List[int]]
+    """
     return plateau[::-1]
 
 
@@ -183,17 +202,22 @@ def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
         ligne_fusionee, points = _fusionner(ligne_sans_zeros)
         nv_points += points
         ligne_finale = _completer_zeros(ligne_fusionee)
-        ligne_finale = _inverser_lignes(ligne_finale)
+        ligne_finale = ligne_finale[::-1]
         nv_plateau.append(ligne_finale)
     return nv_plateau, nv_points
     
 
 
-def _transposer(plateau): # ajouter les annotations de type
+def _transposer(plateau: List[List[int]]) -> List[List[int]]:
     """
-    DOCSTRING À ÉCRIRE
+    Transpose la matrice (échange lignes et colonnes).
+    
+    :param plateau: La grille actuelle du jeu.
+    :type plateau: List[List[int]]
+    :return: La grille transposée.
+    :rtype: List[List[int]]
     """
-    raise NotImplementedError("Fonction _transposer non implémentée.")
+    return [[plateau[i][j] for i in range(len(plateau))] for j in range(len(plateau[0]))]
 
 def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
@@ -202,7 +226,9 @@ def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :param plateau: La grille actuelle du jeu.
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     """
-    raise NotImplementedError("Fonction _deplacer_haut non implémentée.")
+    plateau_transpose = _transposer(plateau)
+    plateau_deplace, points = _deplacer_gauche(plateau_transpose)
+    return _transposer(plateau_deplace), points
 
 
 def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
@@ -212,15 +238,20 @@ def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     :param plateau: La grille actuelle du jeu.
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
     """
-    raise NotImplementedError("Fonction _deplacer_bas non implémentée.")
+    plateau_transpose = _transposer(plateau)
+    plateau_deplace, points = _deplacer_droite(plateau_transpose)
+    return _transposer(plateau_deplace), points
 
 def _partie_terminee(plateau: List[List[int]]) -> bool:
     """
-    DOCSTRING À ÉCRIRE
+    Vérifie si la partie est terminée.
     """
     # Partie non terminee si il y a des cases vides
+    if len(_get_cases_vides(plateau)) > 0:
+        return False
+    
     # Partie non terminee si il y a des fusions possibles (horizontale ou verticale)
     # Sinon c'est vrai
 
-    raise NotImplementedError("Fonction _partie_terminee non implémentée.")
+    return false
 
