@@ -198,14 +198,14 @@ def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     nv_plateau = []
     nv_points = 0
     for i in range(len(plateau)):
-        ligne_sans_zeros = _supprimer_zeros(plateau[i])
+        ligne_inversee = plateau[i][::-1]
+        ligne_sans_zeros = _supprimer_zeros(ligne_inversee)
         ligne_fusionee, points = _fusionner(ligne_sans_zeros)
         nv_points += points
         ligne_finale = _completer_zeros(ligne_fusionee)
         ligne_finale = ligne_finale[::-1]
         nv_plateau.append(ligne_finale)
     return nv_plateau, nv_points
-    
 
 
 def _transposer(plateau: List[List[int]]) -> List[List[int]]:
@@ -219,9 +219,10 @@ def _transposer(plateau: List[List[int]]) -> List[List[int]]:
     """
     return [[plateau[i][j] for i in range(len(plateau))] for j in range(len(plateau[0]))]
 
+
 def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
-    Déplace les tuiles vers le haut en fusionnant les valeurs identiques.
+    Déplace les tuiles vers le haut.
 
     :param plateau: La grille actuelle du jeu.
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
@@ -233,7 +234,7 @@ def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
 
 def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     """
-    Déplace les tuiles vers le bas en fusionnant les valeurs identiques.
+    Déplace les tuiles vers le bas.
 
     :param plateau: La grille actuelle du jeu.
     :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
@@ -246,12 +247,4 @@ def _partie_terminee(plateau: List[List[int]]) -> bool:
     """
     Vérifie si la partie est terminée.
     """
-    # Partie non terminee si il y a des cases vides
-    if len(_get_cases_vides(plateau)) > 0:
-        return False
-    
-    # Partie non terminee si il y a des fusions possibles (horizontale ou verticale)
-    # Sinon c'est vrai
-
-    return false
-
+    return False
