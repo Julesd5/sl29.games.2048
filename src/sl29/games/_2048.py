@@ -225,7 +225,7 @@ def _deplacer_haut(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     Déplace les tuiles vers le haut.
 
     :param plateau: La grille actuelle du jeu.
-    :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
+    :return: Un tuple
     """
     plateau_transpose = _transposer(plateau)
     plateau_deplace, points = _deplacer_gauche(plateau_transpose)
@@ -237,7 +237,7 @@ def _deplacer_bas(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
     Déplace les tuiles vers le bas.
 
     :param plateau: La grille actuelle du jeu.
-    :return: Un tuple contenant la nouvelle grille après déplacement et les points gagnés.
+    :return: Un tuple 
     """
     plateau_transpose = _transposer(plateau)
     plateau_deplace, points = _deplacer_droite(plateau_transpose)
@@ -247,4 +247,20 @@ def _partie_terminee(plateau: List[List[int]]) -> bool:
     """
     Vérifie si la partie est terminée.
     """
-    return False
+    if _get_cases_vides(plateau) != []:
+        return False
+
+    for i in range(len(plateau)):
+        ligne_sans_zeros = _supprimer_zeros(plateau[i])
+        ligne_fusionee, points = _fusionner(ligne_sans_zeros)
+        if points > 0:
+            return False
+
+    plateau_transpose = _transposer(plateau)
+    for i in range(len(plateau_transpose)):
+        ligne_sans_zeros = _supprimer_zeros(plateau_transpose[i])
+        ligne_fusionee, points = _fusionner(ligne_sans_zeros)
+        if points > 0:
+            return False
+    
+    return True

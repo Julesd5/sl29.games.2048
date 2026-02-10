@@ -209,7 +209,21 @@ def test__transposer():
 
 def test__deplacer_haut():
     print("----> Tests de _deplacer_haut...")
-    raise NotImplementedError("Tests de _deplacer_haut non implémentés.")
+    plateau = [
+        [2, 2, 0, 8],
+        [2, 0, 4, 4],
+        [0, 2, 4, 2],
+        [0, 2, 0, 2]
+    ]
+    attendu_p = [
+        [4, 4, 8, 8],
+        [0, 2, 0, 4],
+        [0, 0, 0, 4],
+        [0, 0, 0, 0]
+    ]
+    resultat, points = _deplacer_haut(plateau)
+    assert resultat == attendu_p, f"J'aurais du avoir ce plateau {attendu_p} points mais j'ai ce plateau {resultat}."
+    assert points == 20, f"J'aurais du avoir {20} points mais j'ai {points} points."
     print("OK")
 
 def test__deplacer_bas():
