@@ -159,10 +159,10 @@ def test__inverser_lignes():
         [8, 4, 2, 2]
     ]
     attendu_p = [
-    [8, 4, 2, 2],
-    [0, 0, 4, 4],
+    [0, 0, 2, 2],
     [2, 2, 2, 2],
-    [2, 2, 0, 0]
+    [4, 4, 0, 0],
+    [2, 2, 4, 8]
     ]
     resultat = _inverser_lignes(plateau)
     assert resultat == attendu_p, f"Attendu {attendu_p}, mais obtenu {resultat}"

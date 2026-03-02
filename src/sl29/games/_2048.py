@@ -4,7 +4,7 @@ import random
 import copy
 from typing import List, Tuple
 
-TAILLE:int = 4
+TAILLE:int = 2
 
 
 # ==========================================================
@@ -77,6 +77,7 @@ def _get_cases_vides(plateau: List[List[int]]) -> List[Tuple[int, int]]:
     :return: Une liste de coordonnées
     :rtype: List[Tuple[int, int]]
     """
+    #TODO:Liste par comprehension
     liste = []
     for i in range(len((plateau))):
         for j in range(len((plateau))):
@@ -109,11 +110,7 @@ def _supprimer_zeros(ligne: List[int]) -> List[int]:
     :return: La ligne sans zéros.
     :rtype: List[int]
     """
-    result = []
-    for value in ligne:
-        if value != 0:
-            result.append(value)
-    return result
+    return [value for value in ligne if value != 0]
 
 
 def _fusionner(ligne: List[int]) -> Tuple[List[int], int]:
@@ -183,7 +180,7 @@ def _inverser_lignes(plateau: List[List[int]]) -> List[List[int]]:
     :return: Le plateau avec les lignes inversées.
     :rtype: List[List[int]]
     """
-    return plateau[::-1]
+    return [ligne[::-1] for ligne in plateau]
 
 
 def _deplacer_droite(plateau: List[List[int]]) -> Tuple[List[List[int]], int]:
